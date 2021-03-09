@@ -1,0 +1,21 @@
+.container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+#gameboard-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    justify-content: center;
+}
+
+.gameboard-field {
+    width: 200px;
+    height: 200px;
+    background-color: antiquewhite;
+    justify-self: center;
+    text-align: center;
+    align-self: center;
+}
