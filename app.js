@@ -1,18 +1,36 @@
+const boardContainerElement = document.getElementById('gameboard-container')
+
+
 // Gameboard
 
 const gameboard = {
-    gameField: ['X', 'O', 'X', 'O', 'X', 'X', 'X', 'O', 'X'],
+    gameField: ['', '', '', '', '', '', '', '', ''],
 }
 
 
 //Player factory
 
-const player = (name, sign) => {
+const Player = (name, sign) => {
     
-    let playerName = name;
-    let playerSign = sign;
+    const getName = () => name;
+    let getSign = () => sign;
     
-    return {playerName, playerSign} 
+    // Add Marks on field
+
+
+    function addMark (e) {
+        if (e.target != e.currentTarget) {
+            let position = e.target.id;
+            let fieldChoice = gameboard.gameField
+                if(!fieldChoice[position])
+                    fieldChoice[position] = sign;
+        }
+        renderChoices();
+        }
+
+
+
+    return {addMark, getName, getSign} 
 };
 
 
@@ -34,23 +52,11 @@ function renderChoices () {
 renderChoices();
 
 
-// Add Marks on field
 
-const boardContainerElement = document.getElementById('gameboard-container')
+const player1 = Player('Player 1', 'X');
+const player2 = Player('Player 2', 'O');
 
-function addMark (e) {
-    if (e.target != e.currentTarget) {
-        let position = e.target.id;
-        console.log(position)
-        gameboard.gameField[position] = 'X';
-    }
-    renderChoices();
-
-}
-
-boardContainerElement.addEventListener('click', addMark);
-
-
+boardContainerElement.addEventListener('click', player2.addMark);
 
 
 
