@@ -1,6 +1,5 @@
 
 
-//let gameActive = true;
 
 
 const player = (name, sign) => {
@@ -16,9 +15,6 @@ let currentPlayer = player1;
 
 
 
-
-
-
 let game = (() => {
 
     gameState = ['', '', '', '', '', '', '', '', ''];
@@ -30,6 +26,8 @@ let game = (() => {
 
 
     const cellElement = document.querySelectorAll('.cell');
+    const gameStatus = document.getElementById('game--status')
+    const restartElement = document.getElementById('game--restart')
 
 
     function handleCellPlayed(e) {
@@ -53,11 +51,10 @@ let game = (() => {
             gameState[0] == gameState[4] && gameState[4] == gameState[8] && (gameState[8] == 'X' || gameState[8] == 'O') ||
             gameState[2] == gameState[4] && gameState[4] == gameState[6] && (gameState[6] == 'X' || gameState[6] == 'O')) {
                 alert(`Winner is ${player.name}`)
-                handleRestartGame();
             }  else if (!gameState.includes('')) {
                 alert("It's a draw");
-                handleRestartGame();
-            } else handlePlayerChange();
+            } else handlePlayerChange()
+            updateGameStatus();
     }
 
 
@@ -78,11 +75,19 @@ let game = (() => {
         currentPlayer = player1;
         player = player1;
         cellElement.forEach(x => x.innerHTML = '');
+        gameStatus.innerHTML = `${currentPlayer.name} turn`;
     }
 
-    cellElement.forEach(x = function(x) {x.addEventListener('click', function(e){
+
+    function updateGameStatus() {
+        gameStatus.innerHTML = `${currentPlayer.name} turn`;
+    }
+
+    cellElement.forEach(x => x.addEventListener('click', function(e){
         handleCellPlayed(e);
-    })})
+    }))
+
+    restartElement.addEventListener('click', handleRestartGame);
 
 })();
 
