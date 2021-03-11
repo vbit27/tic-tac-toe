@@ -34,10 +34,11 @@ let game = (() => {
 
     function handleCellPlayed(e) {
         let index = e.target.id
-        gameState[index] = player.sign
-        console.log(gameState)
-        handleResultValidation()
-        handlePlayerChange();
+        if (!gameState[index]) {
+            gameState[index] = player.sign
+            console.log(gameState)
+            handleResultValidation()
+        }    
     }
 
 
@@ -53,8 +54,7 @@ let game = (() => {
             gameState[2] == gameState[4] && gameState[4] == gameState[6] && (gameState[6] == 'X' || gameState[6] == 'O')) {
                 alert(`Winner is ${player.name}`)
                 handleRestartGame();
-            }
-
+            }  else handlePlayerChange();
     }
 
 
@@ -67,6 +67,7 @@ let game = (() => {
             currentPlayer = player1;
             player = player1;
         }
+
     }
 
 
@@ -74,17 +75,15 @@ let game = (() => {
         gameState = ['', '', '', '', '', '', '', '', ''];
         currentPlayer = player1;
         player = player1;
-
     }
 
     cellElement.forEach(x => x.addEventListener('click', function(e){
         handleCellPlayed(e)
-    }, {once: true}))
+    }))
 
 })();
 
 
-// Factory Function
 
 
 
