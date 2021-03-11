@@ -21,12 +21,12 @@ let currentPlayer = player1;
 
 let game = (() => {
 
-    gameState = ['', '', '', '', '', '', '', '', '']
+    gameState = ['', '', '', '', '', '', '', '', ''];
 
     let player = {
         name: 'Plyer 1',
         sign: 'X'
-    }
+    };
 
 
     const cellElement = document.querySelectorAll('.cell');
@@ -36,8 +36,8 @@ let game = (() => {
         let index = e.target.id
         if (!gameState[index]) {
             gameState[index] = player.sign
-            console.log(gameState)
-            handleResultValidation()
+            e.target.innerHTML = player.sign;
+            handleResultValidation();
         }    
     }
 
@@ -67,8 +67,9 @@ let game = (() => {
             currentPlayer = player1;
             player = player1;
         }
-
     }
+
+
 
 
     function handleRestartGame() {
@@ -77,9 +78,9 @@ let game = (() => {
         player = player1;
     }
 
-    cellElement.forEach(x => x.addEventListener('click', function(e){
-        handleCellPlayed(e)
-    }))
+    cellElement.forEach(x = function(x) {x.addEventListener('click', function(e){
+        handleCellPlayed(e);
+    })})
 
 })();
 
