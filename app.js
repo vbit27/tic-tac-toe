@@ -35,6 +35,7 @@ let game = (() => {
     function handleCellPlayed(e) {
         let index = e.target.id
         gameState[index] = player.sign
+        console.log(gameState)
         handleResultValidation()
         handlePlayerChange();
     }
@@ -42,15 +43,16 @@ let game = (() => {
 
     function handleResultValidation() {
         if (
-            gameState[0] == gameState[1] && gameState[1] == gameState[2] ||
-            gameState[3] == gameState[4] && gameState[4] == gameState[5] ||
-            gameState[6] == gameState[7] && gameState[7] == gameState[8] ||
-            gameState[0] == gameState[3] && gameState[3] == gameState[6] ||
-            gameState[1] == gameState[4] && gameState[4] == gameState[7] ||
-            gameState[2] == gameState[5] && gameState[5] == gameState[8] ||
-            gameState[0] == gameState[4] && gameState[4] == gameState[8] ||
-            gameState[2] == gameState[4] && gameState[4] == gameState[6]) {
-                alert('equal')
+            gameState[0] == gameState[1] && gameState[1] == gameState[2] && (gameState[2] == 'X' || gameState[2] == 'O') ||
+            gameState[3] == gameState[4] && gameState[4] == gameState[5] && (gameState[5] == 'X' || gameState[5] == 'O') ||
+            gameState[6] == gameState[7] && gameState[7] == gameState[8] && (gameState[8] == 'X' || gameState[8] == 'O') ||
+            gameState[0] == gameState[3] && gameState[3] == gameState[6] && (gameState[6] == 'X' || gameState[6] == 'O') ||
+            gameState[1] == gameState[4] && gameState[4] == gameState[7] && (gameState[7] == 'X' || gameState[7] == 'O') ||
+            gameState[2] == gameState[5] && gameState[5] == gameState[8] && (gameState[8] == 'X' || gameState[8] == 'O') ||
+            gameState[0] == gameState[4] && gameState[4] == gameState[8] && (gameState[8] == 'X' || gameState[8] == 'O') ||
+            gameState[2] == gameState[4] && gameState[4] == gameState[6] && (gameState[6] == 'X' || gameState[6] == 'O')) {
+                alert(`Winner is ${player.name}`)
+                handleRestartGame();
             }
 
     }
@@ -68,9 +70,16 @@ let game = (() => {
     }
 
 
+    function handleRestartGame() {
+        gameState = ['', '', '', '', '', '', '', '', ''];
+        currentPlayer = player1;
+        player = player1;
+
+    }
+
     cellElement.forEach(x => x.addEventListener('click', function(e){
         handleCellPlayed(e)
-    }, { once: true}))
+    }, {once: true}))
 
 })();
 
@@ -118,6 +127,4 @@ let game = (() => {
 function handleCellClick() {
 
 }
-function handleRestartGame() {
 
-}
