@@ -54,7 +54,10 @@ let game = (() => {
             gameState[2] == gameState[4] && gameState[4] == gameState[6] && (gameState[6] == 'X' || gameState[6] == 'O')) {
                 alert(`Winner is ${player.name}`)
                 handleRestartGame();
-            }  else handlePlayerChange();
+            }  else if (!gameState.includes('')) {
+                alert("It's a draw");
+                handleRestartGame();
+            } else handlePlayerChange();
     }
 
 
@@ -70,12 +73,11 @@ let game = (() => {
     }
 
 
-
-
     function handleRestartGame() {
         gameState = ['', '', '', '', '', '', '', '', ''];
         currentPlayer = player1;
         player = player1;
+        cellElement.forEach(x => x.innerHTML = '');
     }
 
     cellElement.forEach(x = function(x) {x.addEventListener('click', function(e){
