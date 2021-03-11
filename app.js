@@ -1,64 +1,123 @@
-const boardContainerElement = document.getElementById('gameboard-container')
 
 
-// Gameboard
+//let gameActive = true;
 
-const gameboard = {
-    gameField: ['', '', '', '', '', '', '', '', ''],
+
+const player = (name, sign) => {
+    return {name, sign}
 }
 
-
-//Player factory
-
-const Player = (name, sign) => {
-    
-    const getName = () => name;
-    let getSign = () => sign;
-    
-    // Add Marks on field
+const player1 = player('Player 1', 'X');
+const player2 = player('Player 2', 'O');
 
 
-    function addMark (e) {
-        if (e.target != e.currentTarget) {
-            let position = e.target.id;
-            let fieldChoice = gameboard.gameField
-                if(!fieldChoice[position])
-                    fieldChoice[position] = sign;
+let currentPlayer = player1;
+
+
+
+
+
+
+
+let game = (() => {
+
+    gameState = ['', '', '', '', '', '', '', '', '']
+
+    let player = {
+        name: 'Plyer 1',
+        sign: 'X'
+    }
+
+
+    const cellElement = document.querySelectorAll('.cell');
+
+
+    function handleCellPlayed(e) {
+        let index = e.target.id
+        gameState[index] = player.sign
+        handleResultValidation()
+        handlePlayerChange();
+    }
+
+
+    function handleResultValidation() {
+        if (
+            gameState[0] == gameState[1] && gameState[1] == gameState[2] ||
+            gameState[3] == gameState[4] && gameState[4] == gameState[5] ||
+            gameState[6] == gameState[7] && gameState[7] == gameState[8] ||
+            gameState[0] == gameState[3] && gameState[3] == gameState[6] ||
+            gameState[1] == gameState[4] && gameState[4] == gameState[7] ||
+            gameState[2] == gameState[5] && gameState[5] == gameState[8] ||
+            gameState[0] == gameState[4] && gameState[4] == gameState[8] ||
+            gameState[2] == gameState[4] && gameState[4] == gameState[6]) {
+                alert('equal')
+            }
+
+    }
+
+
+
+    function handlePlayerChange() {
+        if (currentPlayer == player1) {
+            currentPlayer = player2;
+            player = player2;
+        } else {
+            currentPlayer = player1;
+            player = player1;
         }
-        renderChoices();
-        }
+    }
+
+
+    cellElement.forEach(x => x.addEventListener('click', function(e){
+        handleCellPlayed(e)
+    }, { once: true}))
+
+})();
+
+
+// Factory Function
 
 
 
-    return {addMark, getName, getSign} 
-};
 
 
-// Update choices on the screen
 
 
-function renderChoices () {
-    const fieldElements = document.querySelectorAll('.gameboard-field');
 
 
-    let i = 0;
 
-    fieldElements.forEach(x => {
-        x.textContent = gameboard.gameField[i]
-        i++
-    }); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function handleCellClick() {
+
 }
+function handleRestartGame() {
 
-renderChoices();
-
-
-
-const player1 = Player('Player 1', 'X');
-const player2 = Player('Player 2', 'O');
-
-boardContainerElement.addEventListener('click', player2.addMark);
-
-
-
-
-
+}
