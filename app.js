@@ -4,7 +4,7 @@
 const addNameElement = document.getElementById('getInput');
 const container = document.querySelector('.container');
 
-function getInputValue() {
+function startGame() {
     const typedNameOne = document.getElementById('player-1-name').value;
     const typedNameTwo = document.getElementById('player-2-name').value;
     
@@ -23,7 +23,7 @@ function getInputValue() {
     container.classList.toggle('visible');
 }
 
-addNameElement.addEventListener('click', getInputValue);
+addNameElement.addEventListener('click', startGame);
 
 
 let player1;
@@ -34,16 +34,11 @@ let currentPlayer
 
 
 
-let game = (() => { //  ADD PLAYER ONE NAD TWO AS ARGUMENTS! 
+let game = (() => { 
 
     gameState = ['', '', '', '', '', '', '', '', ''];
 
-    let player = {
-        name: 'Plyer 1',
-        sign: 'X'
-    };
-
-
+ 
     const cellElement = document.querySelectorAll('.cell');
     const gameStatus = document.getElementById('game--status')
     const restartElement = document.getElementById('game--restart')
@@ -52,8 +47,8 @@ let game = (() => { //  ADD PLAYER ONE NAD TWO AS ARGUMENTS!
     function handleCellPlayed(e) {
         let index = e.target.id
         if (!gameState[index]) {
-            gameState[index] = player.sign
-            e.target.innerHTML = player.sign;
+            gameState[index] = currentPlayer.sign
+            e.target.innerHTML = currentPlayer.sign;
             handleResultValidation();
         }    
     }
@@ -69,7 +64,7 @@ let game = (() => { //  ADD PLAYER ONE NAD TWO AS ARGUMENTS!
             gameState[2] == gameState[5] && gameState[5] == gameState[8] && (gameState[8] == 'X' || gameState[8] == 'O') ||
             gameState[0] == gameState[4] && gameState[4] == gameState[8] && (gameState[8] == 'X' || gameState[8] == 'O') ||
             gameState[2] == gameState[4] && gameState[4] == gameState[6] && (gameState[6] == 'X' || gameState[6] == 'O')) {
-                alert(`Winner is ${player.name}`)
+                alert(`Winner is ${currentPlayer.name}`)
             }  else if (!gameState.includes('')) {
                 alert("It's a draw");
             } else handlePlayerChange()
@@ -82,10 +77,8 @@ let game = (() => { //  ADD PLAYER ONE NAD TWO AS ARGUMENTS!
     function handlePlayerChange() {
         if (currentPlayer == player1) {
             currentPlayer = player2;
-            player = player2;
         } else {
             currentPlayer = player1;
-            player = player1;
         }
     }
 
@@ -93,14 +86,13 @@ let game = (() => { //  ADD PLAYER ONE NAD TWO AS ARGUMENTS!
     function handleRestartGame() {
         gameState = ['', '', '', '', '', '', '', '', ''];
         currentPlayer = player1;
-        player = player1;
         cellElement.forEach(x => x.innerHTML = '');
-        gameStatus.innerHTML = `${currentPlayer.name} turn`;
+        gameStatus.innerHTML = `${currentPlayer.name}'s turn`;
     }
 
 
     function updateGameStatus() {
-        gameStatus.innerHTML = `${currentPlayer.name} turn`;
+        gameStatus.innerHTML = `${currentPlayer.name}'s turn`;
     }
 
     cellElement.forEach(x => x.addEventListener('click', function(e){
