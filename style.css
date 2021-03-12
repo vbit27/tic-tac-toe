@@ -11,6 +11,11 @@ h1, h2 {
 .container {
     width: 50%;
     margin: 0 auto;
+    display: none;
+}
+
+.container.visible {
+    display: block;
 }
 
 #gameboard-container {
@@ -20,6 +25,8 @@ h1, h2 {
     grid-gap: 10px;
     justify-content: center;
 }
+
+
 
 .cell {
     width: 200px;

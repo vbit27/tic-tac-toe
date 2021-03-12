@@ -1,38 +1,40 @@
 
 
 
-    const addNameElement = document.getElementById('getInput');
+const addNameElement = document.getElementById('getInput');
+const container = document.querySelector('.container');
+
+function getInputValue() {
+    const typedNameOne = document.getElementById('player-1-name').value;
+    const typedNameTwo = document.getElementById('player-2-name').value;
     
-
-
-    function getInputValue() {
-     const typedNameOne = document.getElementById('player-1-name').value;
-     const typedNameTwo = document.getElementById('player-2-name').value;
-     
-        player1 = {
-            name: typedNameOne,
-            sign: 'X'
-        }
-
-        player2 = {
-            name: typedNameTwo,
-            sign: 'O'
-        }
+    player1 = {
+        name: typedNameOne,
+        sign: 'X'
     }
 
-    let player1;
-    let player2;
+    player2 = {
+        name: typedNameTwo,
+        sign: 'O'
+    }
 
-   
-    addNameElement.addEventListener('click', getInputValue);
+    currentPlayer = player1;
+
+    container.classList.toggle('visible');
+}
+
+addNameElement.addEventListener('click', getInputValue);
 
 
-let currentPlayer = player1;
+let player1;
+let player2;
+
+let currentPlayer
 
 
 
 
-let game = (() => {
+let game = (() => { //  ADD PLAYER ONE NAD TWO AS ARGUMENTS! 
 
     gameState = ['', '', '', '', '', '', '', '', ''];
 
