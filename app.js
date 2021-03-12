@@ -1,13 +1,30 @@
 
 
 
+    const addNameElement = document.getElementById('getInput');
+    
 
-const player = (name, sign) => {
-    return {name, sign}
-}
 
-const player1 = player('Player 1', 'X');
-const player2 = player('Player 2', 'O');
+    function getInputValue() {
+     const typedNameOne = document.getElementById('player-1-name').value;
+     const typedNameTwo = document.getElementById('player-2-name').value;
+     
+        player1 = {
+            name: typedNameOne,
+            sign: 'X'
+        }
+
+        player2 = {
+            name: typedNameTwo,
+            sign: 'O'
+        }
+    }
+
+    let player1;
+    let player2;
+
+   
+    addNameElement.addEventListener('click', getInputValue);
 
 
 let currentPlayer = player1;
@@ -57,6 +74,7 @@ let game = (() => {
             updateGameStatus();
     }
 
+  
 
 
     function handlePlayerChange() {
@@ -93,45 +111,13 @@ let game = (() => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function handleCellClick() {
-
-}
-
+  /*
+    [0, 1, 2]
+    [3, 4, 5]
+    [6, 7, 8]
+    [0, 3, 6]
+    [1, 4, 7]
+    [2, 5, 8]
+    [0, 4, 8]
+    [2, 4, 6]
+    */
