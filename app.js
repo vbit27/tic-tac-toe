@@ -1,36 +1,38 @@
 
 
+let startGame = (() => {
 
-const addNameElement = document.getElementById('getInput');
-const container = document.querySelector('.container');
+    const addNameElement = document.getElementById('getInput');
 
-function startGame() {
-    const typedNameOne = document.getElementById('player-1-name').value;
-    const typedNameTwo = document.getElementById('player-2-name').value;
-    
-    player1 = {
-        name: typedNameOne,
-        sign: 'X'
-    }
+        function chooseName() {
+        const  typedNameOne = document.getElementById('player-1-name').value;
+        const  typedNameTwo = document.getElementById('player-2-name').value;
+        const container = document.querySelector('.container');
+            
+            player1 = {
+                name: typedNameOne,
+                sign: 'X'
+            }
 
-    player2 = {
-        name: typedNameTwo,
-        sign: 'O'
-    }
+            player2 = {
+                name: typedNameTwo,
+                sign: 'O'
+            }
 
-    currentPlayer = player1;
+            currentPlayer = player1;
 
-    container.classList.toggle('visible');
-}
+            container.classList.toggle('visible');
+        }
 
-addNameElement.addEventListener('click', startGame);
+    addNameElement.addEventListener('click', chooseName);
+
+})();
 
 
 let player1;
 let player2;
 
 let currentPlayer
-
 
 
 
